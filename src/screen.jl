@@ -125,6 +125,7 @@ function init(w::GLWindow.Screen=glscreen("GLPlot");
     empty!(plotting_screens)
     w = glscreen("GLPlot",resolution=resolution)=#
 
+
     preserve(map(handle_drop, w.inputs[:dropped_files]))
 
     w.inputs[:key_pressed] = const_lift(GLAbstraction.singlepressed,
