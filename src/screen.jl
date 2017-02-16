@@ -123,10 +123,11 @@ function init(w::GLWindow.Screen=glscreen("GLPlot");
     #=if !isempty(plotting_screens) && isopen(first(plotting_screens))
         return # already initialized
     end
+    =#
+    if !multiplescreens
+    #  w = glscreen("GLPlot",resolution=resolution)
+    end
     empty!(plotting_screens)
-    w = glscreen("GLPlot",resolution=resolution)=#
-
-
     preserve(map(handle_drop, w.inputs[:dropped_files]))
 
     w.inputs[:key_pressed] = const_lift(GLAbstraction.singlepressed,
@@ -221,7 +222,8 @@ function init(w::GLWindow.Screen=glscreen("GLPlot");
     end
 
     if !multiplescreens
-      global _renderloop_task = @async glplot_renderloop(w, compute_sig, record_sig)
+      @async renderloop(w)
+      #global _renderloop_task = @async glplot_renderloop(w, compute_sig, record_sig)
     end
     viewing_screen
 end
