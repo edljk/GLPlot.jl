@@ -117,12 +117,13 @@ let
 end
 
 
-function init(;resolution::Tuple{Int64,Int64}=GLWindow.standard_screen_resolution())
-    if !isempty(plotting_screens) && isopen(first(plotting_screens))
+function init(w::GLWindow.Screen=glscreen("GLPlot");
+              resolution::Tuple{Int64,Int64}=GLWindow.standard_screen_resolution())
+    #=if !isempty(plotting_screens) && isopen(first(plotting_screens))
         return # already initialized
     end
     empty!(plotting_screens)
-    w = glscreen("GLPlot",resolution=resolution)
+    w = glscreen("GLPlot",resolution=resolution)=#
 
     preserve(map(handle_drop, w.inputs[:dropped_files]))
 
