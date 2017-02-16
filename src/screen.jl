@@ -218,7 +218,7 @@ function init(w::GLWindow.Screen=glscreen("GLPlot");
     edit_screen.inputs[:menu_scroll] = foldp(0, scroll) do v0, s
         v0 + (ceil(Int, s[2]) * 15)
     end
-    global _renderloop_task = @async glplot_renderloop(w, compute_sig, record_sig)
+    #global _renderloop_task = @async glplot_renderloop(w, compute_sig, record_sig)
     viewing_screen
 end
 
